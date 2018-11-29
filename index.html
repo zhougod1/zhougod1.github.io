@@ -1,5 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+<script>
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open('GET','https://www.sojson.com/open/api/weather/json.shtml?city=北京');
+    xmlhttp.onreadystatechange=state_Change;
+    xmlhttp.open("GET",url,true);
+    xmlhttp.send(null);
+    function state_Change(){
+        if (xmlhttp.readyState==4)
+        {// 4 = "loaded"
+        if (xmlhttp.status==200)
+            {// 200 = OK
+            console.log(xmlhttp.data)
+            }
+        else
+            {
+            alert("Problem retrieving XML data");
+            }
+        }
+    }
+</script>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +27,6 @@
     <title>Document</title>
 </head>
 <body>
-    <div>hello word</div>
+    <div id="content">hello word</div>
 </body>
 </html>
