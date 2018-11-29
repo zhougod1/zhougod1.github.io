@@ -11,9 +11,8 @@
 </body>
 <script>
     var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open('GET','https://www.sojson.com/open/api/weather/json.shtml?city=北京');
     xmlhttp.onreadystatechange=state_Change;
-    xmlhttp.open("GET",url,true);
+    xmlhttp.open('GET','https://www.sojson.com/open/api/weather/json.shtml?city=北京');
     xmlhttp.send(null);
     function state_Change(){
         if (xmlhttp.readyState==4)
