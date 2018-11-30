@@ -1,31 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    <div id="content">hello word</div>
-</body>
-<script>
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange=state_Change;
-    xmlhttp.open('GET','https://www.sojson.com/open/api/weather/json.shtml?city=北京');
-    xmlhttp.send(null);
-    function state_Change(){
-        if (xmlhttp.readyState==4)
-        {// 4 = "loaded"
-        if (xmlhttp.status==200)
-            {// 200 = OK
-            console.log(xmlhttp.data)
-            }
-        else
-            {
-            alert("Problem retrieving XML data");
-            }
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+    </head>
+    <body>
+        <span class="body">hello word</span>
+        <div id="content"></div>
+    </body>
+    <style type="text/css">
+        .body {
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-image: -webkit-gradient(linear, left 0, right 0, from(rgb(4, 94, 170)), to(rgb(1, 152, 216)));
+            font-size: 40px;
+            font-weight: bold;
         }
-    }
-</script>
+        .child {
+
+        };
+        .grand {
+
+        }
+    </style>
 </html>
