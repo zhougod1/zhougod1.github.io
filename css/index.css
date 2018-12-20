@@ -1,0 +1,7 @@
+.title_text_gradient {
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-image: -webkit-gradient(linear, left 0, right 0, from(rgb(4, 94, 170)), to(rgb(1, 152, 216)));
+    font-size: 40px;
+    font-weight: bold;
+}
