@@ -64,38 +64,38 @@ function init() {
       color: 0xff0000
     })
 
-    // 创建一个半径为 8 个球体
-    var boxGeometry = new THREE.SphereGeometry(8)
+    // // 创建一个半径为 8 个球体
+    // var boxGeometry = new THREE.SphereGeometry(8)
 
-    // This can be used as a helper object to view the edges of a Geometry object
-    var edgesGeometry = new THREE.EdgesGeometry(boxGeometry)
-    var edgesLine = new THREE.LineSegments(edgesGeometry, lineMaterial)
-    edgesLine.position.x = -30
-    scene.add(edgesLine)
+    // // This can be used as a helper object to view the edges of a Geometry object
+    // var edgesGeometry = new THREE.EdgesGeometry(boxGeometry)
+    // var edgesLine = new THREE.LineSegments(edgesGeometry, lineMaterial)
+    // edgesLine.position.x = -30
+    // scene.add(edgesLine)
 
-    // This can be used as a helper object to view a Geometry object as a wireframe.
-    var wrieframe = new THREE.WireframeGeometry(boxGeometry)
-    var wrieframeLine = new THREE.LineSegments(wrieframe, lineMaterial)
+    // // This can be used as a helper object to view a Geometry object as a wireframe.
+    // var wrieframe = new THREE.WireframeGeometry(boxGeometry)
+    // var wrieframeLine = new THREE.LineSegments(wrieframe, lineMaterial)
 
-    scene.add(wrieframeLine)
+    // scene.add(wrieframeLine)
 
     // 创建一个二维形状：三角形
-    function drawShape() {
+    // function drawShape() {
 
-      // create a basic shape
-      var shape = new THREE.Shape();
+    //   // create a basic shape
+    //   var shape = new THREE.Shape();
 
-      // startpoint
-      shape.moveTo(0, -10);
+    //   // startpoint
+    //   shape.moveTo(0, -10);
 
-      // straight line upwards
-      shape.lineTo(00, 10);
-      shape.lineTo(20, 10);
-      shape.lineTo(0, -10);
+    //   // straight line upwards
+    //   shape.lineTo(00, 10);
+    //   shape.lineTo(20, 10);
+    //   shape.lineTo(0, -10);
 
-      // return the shape
-      return shape;
-    }
+    //   // return the shape
+    //   return shape;
+    // }
 
     // 创建一个法向量材质：其颜色取决于面的法向量的方向
     var meshMaterial = new THREE.MeshNormalMaterial({
@@ -105,22 +105,22 @@ function init() {
     })
 
     // ExtrudeGeometry 的参数，用于指定如何拉伸二维形状
-    var options = {
-      amount: 2,
-      bevelThickness: 2,
-      bevelSize: 0.5,
-      bevelSegments: 3,
-      bevelEnabled: true,
-      curveSegments: 12,
-      steps: 1
-    }
+    // var options = {
+    //   amount: 2,
+    //   bevelThickness: 2,
+    //   bevelSize: 0.5,
+    //   bevelSegments: 3,
+    //   bevelEnabled: true,
+    //   curveSegments: 12,
+    //   steps: 1
+    // }
 
     // 将一个二维形状按照指定参数向 Z 轴拉伸
-    var extrudeGeometry = new THREE.ExtrudeGeometry(drawShape(), options)
-    var mesh = new THREE.Mesh(extrudeGeometry, meshMaterial)
+    // var extrudeGeometry = new THREE.ExtrudeGeometry(drawShape(), options)
+    // var mesh = new THREE.Mesh(extrudeGeometry, meshMaterial)
 
-    mesh.position.x = 20
-    scene.add(mesh)
+    // mesh.position.x = 20
+    // scene.add(mesh)
 
 
     // 创建一个字体加载器
