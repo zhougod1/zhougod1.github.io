@@ -1,3 +1,4 @@
+
 function init() {
     // 获取浏览器窗口的宽高，后续会用
     var width = window.innerWidth
@@ -14,12 +15,13 @@ function init() {
     camera.lookAt(new THREE.Vector3(0, 0, 0))
 
     // 创建一个 WebGL 渲染器，Three.js 还提供 <canvas>, <svg>, CSS3D 渲染器。
-    var renderer = new THREE.WebGLRenderer({
-      antialias: true
-    })
+    // var renderer = new THREE.WebGLRenderer({
+    //   antialias: true
+    // })
+    renderer = new THREE.CSS3DRenderer();
 
     // 设置渲染器的清除颜色（即背景色）和尺寸
-    renderer.setClearColor(0xffffff)
+    // renderer.setClearColor(0xffffff)
     renderer.setSize(width, height)
 
     // 将渲染器的输出（此处是 canvas 元素）插入到 body
@@ -96,7 +98,69 @@ function init() {
     //   // return the shape
     //   return shape;
     // }
-
+    // function loadTexture(d){
+    //   var b = new THREE.Texture()
+    //       b.image = new THREE.TextureLoader().load(d);
+    //   var a = new THREE.MeshBasicMaterial({
+    //       map: b,
+    //       overdraw: 0.5
+    //   });
+    //   return a
+    // }
+    var index = 0;
+    var b = "mobile";
+    // var a = [loadTexture(load_url + "/" + villaId + "/" + name_arr[index] + "/" + b + "_f.jpg"), loadTexture(load_url + "/" + villaId + "/" + name_arr[index] + "/" + b + "_b.jpg"), loadTexture(load_url + "/" + villaId + "/" + name_arr[index] + "/" + b + "_u.jpg"), loadTexture(load_url + "/" + villaId + "/" + name_arr[index] + "/" + b + "_d.jpg"), loadTexture(load_url + "/" + villaId + "/" + name_arr[index] + "/" + b + "_l.jpg"), loadTexture(load_url + "/" + villaId + "/" + name_arr[index] + "/" + b + "_r.jpg")];
+    // var c = new THREE.Mesh(new THREE.BoxGeometry(300, 300, 300, 7, 7, 7), new THREE.MultiMaterial(a));
+    var url = [load_url + "/" + villaId + "/" + name_arr[index] + "/" + b + "_f.jpg",
+     load_url + "/" + villaId + "/" + name_arr[index] + "/" + b + "_b.jpg",
+     load_url + "/" + villaId + "/" + name_arr[index] + "/" + b + "_u.jpg",
+     load_url + "/" + villaId + "/" + name_arr[index] + "/" + b + "_d.jpg",
+     load_url + "/" + villaId + "/" + name_arr[index] + "/" + b + "_l.jpg",
+     load_url + "/" + villaId + "/" + name_arr[index] + "/" + b + "_r.jpg"];
+                    var sides = [
+                    {
+                        url: url[0],  //右侧
+                        position: [ -512, 0, 0 ],
+                        rotation: [ 0, Math.PI / 2, 0 ]
+                    },
+                    {
+                        url: url[1], //左侧
+                        position: [ 512, 0, 0 ],
+                        rotation: [ 0, -Math.PI / 2, 0 ]
+                    },
+                    {
+                        url: url[2], //上侧
+                        position: [ 0,  512, 0 ],
+                        rotation: [ Math.PI / 2, 0, Math.PI ]
+                    },
+                    {
+                        url: url[3], //下侧
+                        position: [ 0, -512, 0 ],
+                        rotation: [ - Math.PI / 2, 0, Math.PI ]
+                    },
+                    {
+                        url: url[4], //前
+                        position: [ 0, 0,  512 ],
+                        rotation: [ 0, Math.PI, 0 ]
+                    },
+                    {
+                        url: url[5], //后
+                        position: [ 0, 0, -512 ],
+                        rotation: [ 0, 0, 0 ]
+                    }
+                ];
+                //将六个图片添加到场景中
+                for ( var i = 0; i < sides.length; i ++ ) {
+                    var side = sides[ i ];
+                    var element = document.createElement( 'img' );
+                    element.width = 1026; // 2 pixels extra to close the gap.
+                    element.src = side.url;
+                    //CSS3DObject 是拓展出去的方法，原型是object3D，见CSS3DRenderer.js
+                    var object = new THREE.CSS3DObject( element );
+                    object.position.fromArray( side.position );
+                    object.rotation.fromArray( side.rotation );
+                    scene.add( object );
+                }
     // 创建一个法向量材质：其颜色取决于面的法向量的方向
     var meshMaterial = new THREE.MeshNormalMaterial({
       flatShading: THREE.FlatShading,
@@ -127,24 +191,26 @@ function init() {
     var fontLoader = new THREE.FontLoader()
 
     // 字体的本质就是一堆类似 SVG 的路径，因此直线占比越高越好。
-    fontLoader.load('https://threejs.org/examples/fonts/helvetiker_regular.typeface.json', function (font) {
-      var textOptions = {
-        font: font,
-        size: 18,
-        height: 4,
-        curveSegments: 12,
-        bevelEnabled: true,
-        bevelThickness: 2,
-        bevelSize: 2,
-        bevelSegments: 2
-      }
+    // fontLoader.load('https://threejs.org/examples/fonts/helvetiker_regular.typeface.json', function (font) {
+    //   var textOptions = {
+    //     font: font,
+    //     size: 18,
+    //     height: 4,
+    //     curveSegments: 12,
+    //     bevelEnabled: true,
+    //     bevelThickness: 2,
+    //     bevelSize: 2,
+    //     bevelSegments: 2
+    //   }
 
-      // TextGeometry 的本质就是 ExtrudeGeometry，将二维字体按照指定参数向 Z 轴拉伸
-      var textGeometry = new THREE.TextGeometry('Yumiko', textOptions)
-      var textMesh = new THREE.Mesh(textGeometry, meshMaterial)
-      textMesh.position.set(-44, -9, -40)
-      scene.add(textMesh)
+    //   // TextGeometry 的本质就是 ExtrudeGeometry，将二维字体按照指定参数向 Z 轴拉伸
+    //   var textGeometry = new THREE.TextGeometry('Yumiko', textOptions)
+    //   var textMesh = new THREE.Mesh(textGeometry, meshMaterial)
+    //   textMesh.position.set(-44, -9, -40)
+    //   scene.add(textMesh)
 
+    //   render()
+    // })
       render()
-    })
   }
+
