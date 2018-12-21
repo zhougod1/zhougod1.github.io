@@ -31,7 +31,7 @@ function init() {
     var ambientLight = new THREE.AmbientLight(0x777777)
     scene.add(ambientLight)
 
-    // 添加聚光灯
+    // 添加聚光灯000000000000000000000000000000000000000000000
     var spotLight = new THREE.SpotLight(0xaaaaaa)
     spotLight.position.set(-40, 40, 80)
     scene.add(spotLight)
@@ -42,20 +42,18 @@ function init() {
       requestAnimationFrame(render)
     }
 
+    // 平面
     // 创建一个平面 PlaneGeometry(width, height, widthSegments, heightSegments)
-    var planeGeometry = new THREE.PlaneGeometry(120, 90, 1, 1)
-
+    // var planeGeometry = new THREE.PlaneGeometry(120, 90, 1, 1)
     // 创建 Lambert 材质：会对场景中的光源作出反应，但表现为暗淡，而不光亮。
-    var planeMaterial = new THREE.MeshLambertMaterial({
-      color: 0xffffff
-    })
-    var plane = new THREE.Mesh(planeGeometry, planeMaterial)
-
+    // var planeMaterial = new THREE.MeshLambertMaterial({
+    //   color: 0xffffff
+    // })
+    // var plane = new THREE.Mesh(planeGeometry, planeMaterial)
     // 以自身中心为旋转轴，绕 x 轴顺时针旋转 45 度
-    plane.rotation.x = -0.5 * Math.PI
-    plane.position.set(0, -10.5, -20)
-
-    scene.add(plane)
+    // plane.rotation.x = -0.5 * Math.PI
+    // plane.position.set(0, -10.5, -20)
+    // scene.add(plane)
 
     // 初始化摄像机插件（用于拖拽旋转摄像机，产生交互效果）
     var orbitControls = new THREE.OrbitControls(camera);
@@ -66,36 +64,32 @@ function init() {
       color: 0xff0000
     })
 
-    // // 创建一个半径为 8 个球体
+    //  创建一个半径为 8 个球体
     // var boxGeometry = new THREE.SphereGeometry(8)
-
     // // This can be used as a helper object to view the edges of a Geometry object
     // var edgesGeometry = new THREE.EdgesGeometry(boxGeometry)
     // var edgesLine = new THREE.LineSegments(edgesGeometry, lineMaterial)
     // edgesLine.position.x = -30
     // scene.add(edgesLine)
-
     // // This can be used as a helper object to view a Geometry object as a wireframe.
     // var wrieframe = new THREE.WireframeGeometry(boxGeometry)
     // var wrieframeLine = new THREE.LineSegments(wrieframe, lineMaterial)
-
     // scene.add(wrieframeLine)
 
     // 创建一个二维形状：三角形
     // function drawShape() {
 
-    //   // create a basic shape
-    //   var shape = new THREE.Shape();
 
-    //   // startpoint
-    //   shape.moveTo(0, -10);
+    // var shape = new THREE.Shape();
 
-    //   // straight line upwards
-    //   shape.lineTo(00, 10);
-    //   shape.lineTo(20, 10);
-    //   shape.lineTo(0, -10);
+    //  shape.moveTo(0, -10);
 
-    //   // return the shape
+    //  straight line upwards
+    //  shape.lineTo(00, 10);
+    //  shape.lineTo(20, 10);
+    //  shape.lineTo(0, -10);
+
+    //  return the shape
     //   return shape;
     // }
     // function loadTexture(d){
@@ -117,57 +111,56 @@ function init() {
      load_url + "/" + villaId + "/" + name_arr[index] + "/" + b + "_d.jpg",
      load_url + "/" + villaId + "/" + name_arr[index] + "/" + b + "_l.jpg",
      load_url + "/" + villaId + "/" + name_arr[index] + "/" + b + "_r.jpg"];
-                    var sides = [
-                    {
-                        url: url[0],  //右侧
-                        position: [ -512, 0, 0 ],
-                        rotation: [ 0, Math.PI / 2, 0 ]
-                    },
-                    {
-                        url: url[1], //左侧
-                        position: [ 512, 0, 0 ],
-                        rotation: [ 0, -Math.PI / 2, 0 ]
-                    },
-                    {
-                        url: url[2], //上侧
-                        position: [ 0,  512, 0 ],
-                        rotation: [ Math.PI / 2, 0, Math.PI ]
-                    },
-                    {
-                        url: url[3], //下侧
-                        position: [ 0, -512, 0 ],
-                        rotation: [ - Math.PI / 2, 0, Math.PI ]
-                    },
-                    {
-                        url: url[4], //前
-                        position: [ 0, 0,  512 ],
-                        rotation: [ 0, Math.PI, 0 ]
-                    },
-                    {
-                        url: url[5], //后
-                        position: [ 0, 0, -512 ],
-                        rotation: [ 0, 0, 0 ]
-                    }
-                ];
-                //将六个图片添加到场景中
-                for ( var i = 0; i < sides.length; i ++ ) {
-                    var side = sides[ i ];
-                    var element = document.createElement( 'img' );
-                    element.width = 1026; // 2 pixels extra to close the gap.
-                    element.src = side.url;
-                    //CSS3DObject 是拓展出去的方法，原型是object3D，见CSS3DRenderer.js
-                    var object = new THREE.CSS3DObject( element );
-                    object.position.fromArray( side.position );
-                    object.rotation.fromArray( side.rotation );
-                    scene.add( object );
-                }
+			var sides = [
+			{
+			url: url[0],  //右侧
+			position: [ -512, 0, 0 ],
+			rotation: [ 0, Math.PI / 2, 0 ]
+			},
+			{
+			url: url[1], //左侧
+			position: [ 512, 0, 0 ],
+			rotation: [ 0, -Math.PI / 2, 0 ]
+			},
+			{
+			url: url[2], //上侧
+			position: [ 0,  512, 0 ],
+			rotation: [ Math.PI / 2, 0, Math.PI ]
+			},
+			{
+			url: url[3], //下侧
+			position: [ 0, -512, 0 ],
+			rotation: [ - Math.PI / 2, 0, Math.PI ]
+			},
+			{
+			url: url[4], //前
+			position: [ 0, 0,  512 ],
+			rotation: [ 0, Math.PI, 0 ]
+			},
+			{
+			url: url[5], //后
+			position: [ 0, 0, -512 ],
+			rotation: [ 0, 0, 0 ]
+			}
+			];
+			//将六个图片添加到场景中
+			for ( var i = 0; i < sides.length; i ++ ) {
+			var side = sides[ i ];
+			var element = document.createElement( 'img' );
+			element.width = 1026; // 2 pixels extra to close the gap.
+			element.src = side.url;
+			//CSS3DObject 是拓展出去的方法，原型是object3D，见CSS3DRenderer.js
+			var object = new THREE.CSS3DObject( element );
+			object.position.fromArray( side.position );
+			object.rotation.fromArray( side.rotation );
+			scene.add( object );
+		}
     // 创建一个法向量材质：其颜色取决于面的法向量的方向
-    var meshMaterial = new THREE.MeshNormalMaterial({
-      flatShading: THREE.FlatShading,
-      transparent: true,
-      opacity: 1
-    })
-
+    // var meshMaterial = new THREE.MeshNormalMaterial({
+    //   flatShading: THREE.FlatShading,
+    //   transparent: true,
+    //   opacity: 1
+    // })
     // ExtrudeGeometry 的参数，用于指定如何拉伸二维形状
     // var options = {
     //   amount: 2,
@@ -178,17 +171,14 @@ function init() {
     //   curveSegments: 12,
     //   steps: 1
     // }
-
     // 将一个二维形状按照指定参数向 Z 轴拉伸
     // var extrudeGeometry = new THREE.ExtrudeGeometry(drawShape(), options)
     // var mesh = new THREE.Mesh(extrudeGeometry, meshMaterial)
 
     // mesh.position.x = 20
     // scene.add(mesh)
-
-
     // 创建一个字体加载器
-    var fontLoader = new THREE.FontLoader()
+    // var fontLoader = new THREE.FontLoader()
 
     // 字体的本质就是一堆类似 SVG 的路径，因此直线占比越高越好。
     // fontLoader.load('https://threejs.org/examples/fonts/helvetiker_regular.typeface.json', function (font) {
@@ -211,6 +201,6 @@ function init() {
 
     //   render()
     // })
-      render()
+     render()
   }
 
