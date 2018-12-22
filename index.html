@@ -12,16 +12,28 @@
         <!-- <script src="https://threejs.org/build/three.js"></script>
             <script src="https://threejs.org/examples/js/controls/OrbitControls.js"></script> -->
     </head>
-    <body onload="init()">
+    <body>
         <!-- <span class="title_text_gradient">王田朝你个傻叉</span> -->
         <!-- <image src="https://file.fangline.cn/erp/dict_loading.gif" id="loading"></image> -->
-        <input id="selectFile" accept="image/*" type="file"/>
+        <div>
+            <input id="selectFile" accept="image/*" type="file" class="select_file"/>
+            <label for="selectFile" class="select_file_btn">
+                选择全景图
+            </label>
+        </div>
+        <div id="container" class="container"></div>
     </body>
     <script src="js/three_font.js"></script>
     <script>
         var villaId = "demo";
+        var width;
+        var height;
+        var scene;
+        var camera;
+        var renderer;
         var name_arr =["view1","view2"];//分类地址
         var load_url = 'images/panorama';//相对根路径
+        init();
     </script>
     <style type="text/css"> 
     </style>
