@@ -57,7 +57,8 @@ function init() {
 		// var edgesGeometry = new THREE.SphereBufferGeometry(boxGeometry)
 		var circleMaterial = new THREE.MeshBasicMaterial({
 			// map: new THREE.TextureLoader().load('http://imgsrc.baidu.com/imgad/pic/item/314e251f95cad1c85d6d7d31743e6709c83d51d6.jpg'
-      map: new THREE.TextureLoader().load('https://zhougod1.github.io/images/panorama/demo/view/room.jpg'
+      // map: new THREE.TextureLoader().load('https://zhougod1.github.io/images/panorama/demo/view/room.jpg'
+      map: new THREE.TextureLoader().load('images/panorama/demo/view/room.jpg'
       ,function(){
         document.getElementById('loading').style.visibility = 'hidden'
       })
