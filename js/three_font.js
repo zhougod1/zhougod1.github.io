@@ -1,5 +1,7 @@
 
 function init() {
+    var width;
+    var height;
     var scene;
     var camera;
     var renderer;
@@ -25,6 +27,7 @@ function init() {
       }  
       return url;  
     }
+
     document.getElementById('selectFile').addEventListener('change',function(){
       const url = getObjectURL(this.files[0]);
       circleMaterial.map = new THREE.TextureLoader().load(url);
@@ -35,8 +38,8 @@ function init() {
     function setScene(){
 
       // 获取浏览器窗口的宽高，后续会用
-      var width = window.innerWidth - 40;
-      var height = window.innerHeight - 40;
+      width = window.innerWidth - 40;
+      height = window.innerHeight - 40;
 
       // 创建一个场景
       scene = new THREE.Scene()
@@ -71,6 +74,7 @@ function init() {
       scene.add(spotLight)
     }
     setScene();
+
     function render() {
       // 渲染，即摄像机拍下此刻的场景
       renderer.render(scene, camera)
