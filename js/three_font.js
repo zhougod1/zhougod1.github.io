@@ -1,24 +1,24 @@
 
 function init() {
     // 获取浏览器窗口的宽高，后续会用
-    var width = window.innerWidth
-    var height = window.innerHeight
+    var width = window.innerWidth - 40;
+    var height = window.innerHeight - 40;
 
     // 创建一个场景
     var scene = new THREE.Scene()
 
     // 创建一个具有透视效果的摄像机
-    var camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000)
+    var camera = new THREE.PerspectiveCamera(45, width / height, 1, 1000)
 
     // 设置摄像机位置，并将其朝向场景中心
     camera.position.set(0, 125, 125)
-    camera.lookAt(new THREE.Vector3(0, 0, 0))
+    camera.lookAt(new THREE.Vector3(0, 100, 0))
 
     // 创建一个 WebGL 渲染器，Three.js 还提供 <canvas>, <svg>, CSS3D 渲染器。
-    // var renderer = new THREE.WebGLRenderer({
-    //   antialias: true
-    // })
-    renderer = new THREE.CSS3DRenderer();
+    var renderer = new THREE.WebGLRenderer({
+      antialias: true
+    })
+    // renderer = new THREE.CSS3DRenderer();
 
     // 设置渲染器的清除颜色（即背景色）和尺寸
     // renderer.setClearColor(0xffffff)
@@ -42,27 +42,47 @@ function init() {
       requestAnimationFrame(render)
     }
 
+		// 初始化摄像机插件（用于拖拽旋转摄像机，产生交互效果）
+		var orbitControls = new THREE.OrbitControls(camera);
+		orbitControls.autoRotate = true
+		orbitControls.enableZoom = false;
+
+
+
+
+
+		var boxGeometry = new THREE.SphereGeometry(width/2,100,100)
+
+    boxGeometry.scale(-1,1,1);
+		// var edgesGeometry = new THREE.SphereBufferGeometry(boxGeometry)
+		var circleMaterial = new THREE.MeshBasicMaterial({
+			map: new THREE.TextureLoader().load('http://imgsrc.baidu.com/imgad/pic/item/314e251f95cad1c85d6d7d31743e6709c83d51d6.jpg')
+      // map: new THREE.TextureLoader().setCrossOrigin('crossOrigin').load('/D:/document/blog-maskdown/images/panorama/demo/view/room.jpg')
+
+		});
+
+    var circle = new THREE.Mesh(boxGeometry, circleMaterial);
+		// circle.position.set(0,-50,-50)
+		scene.add(circle)
+
     // 平面
-    // 创建一个平面 PlaneGeometry(width, height, widthSegments, heightSegments)
+    // // 创建一个平面 PlaneGeometry(width, height, widthSegments, heightSegments)
     // var planeGeometry = new THREE.PlaneGeometry(120, 90, 1, 1)
-    // 创建 Lambert 材质：会对场景中的光源作出反应，但表现为暗淡，而不光亮。
+    // // 创建 Lambert 材质：会对场景中的光源作出反应，但表现为暗淡，而不光亮。
     // var planeMaterial = new THREE.MeshLambertMaterial({
     //   color: 0xffffff
     // })
     // var plane = new THREE.Mesh(planeGeometry, planeMaterial)
-    // 以自身中心为旋转轴，绕 x 轴顺时针旋转 45 度
+    // // 以自身中心为旋转轴，绕 x 轴顺时针旋转 45 度
     // plane.rotation.x = -0.5 * Math.PI
     // plane.position.set(0, -10.5, -20)
     // scene.add(plane)
 
-    // 初始化摄像机插件（用于拖拽旋转摄像机，产生交互效果）
-    var orbitControls = new THREE.OrbitControls(camera);
-    orbitControls.autoRotate = true
 
     // 创建红色的线材质
-    var lineMaterial = new THREE.LineBasicMaterial({
-      color: 0xff0000
-    })
+    // var lineMaterial = new THREE.LineBasicMaterial({
+    //   color: 0xff0000
+    // })
 
     //  创建一个半径为 8 个球体
     // var boxGeometry = new THREE.SphereGeometry(8)
@@ -78,17 +98,12 @@ function init() {
 
     // 创建一个二维形状：三角形
     // function drawShape() {
-
-
     // var shape = new THREE.Shape();
-
     //  shape.moveTo(0, -10);
-
     //  straight line upwards
     //  shape.lineTo(00, 10);
     //  shape.lineTo(20, 10);
     //  shape.lineTo(0, -10);
-
     //  return the shape
     //   return shape;
     // }
@@ -101,60 +116,73 @@ function init() {
     //   });
     //   return a
     // }
-    var index = 0;
-    var b = "mobile";
+    // var index = 0;
+    // var b = "mobile";
     // var a = [loadTexture(load_url + "/" + villaId + "/" + name_arr[index] + "/" + b + "_f.jpg"), loadTexture(load_url + "/" + villaId + "/" + name_arr[index] + "/" + b + "_b.jpg"), loadTexture(load_url + "/" + villaId + "/" + name_arr[index] + "/" + b + "_u.jpg"), loadTexture(load_url + "/" + villaId + "/" + name_arr[index] + "/" + b + "_d.jpg"), loadTexture(load_url + "/" + villaId + "/" + name_arr[index] + "/" + b + "_l.jpg"), loadTexture(load_url + "/" + villaId + "/" + name_arr[index] + "/" + b + "_r.jpg")];
-    // var c = new THREE.Mesh(new THREE.BoxGeometry(300, 300, 300, 7, 7, 7), new THREE.MultiMaterial(a));
-    var url = [load_url + "/" + villaId + "/" + name_arr[index] + "/" + b + "_f.jpg",
-     load_url + "/" + villaId + "/" + name_arr[index] + "/" + b + "_b.jpg",
-     load_url + "/" + villaId + "/" + name_arr[index] + "/" + b + "_u.jpg",
-     load_url + "/" + villaId + "/" + name_arr[index] + "/" + b + "_d.jpg",
-     load_url + "/" + villaId + "/" + name_arr[index] + "/" + b + "_l.jpg",
-     load_url + "/" + villaId + "/" + name_arr[index] + "/" + b + "_r.jpg"];
-			var sides = [
-			{
-			url: url[0],  //右侧
-			position: [ -512, 0, 0 ],
-			rotation: [ 0, Math.PI / 2, 0 ]
-			},
-			{
-			url: url[1], //左侧
-			position: [ 512, 0, 0 ],
-			rotation: [ 0, -Math.PI / 2, 0 ]
-			},
-			{
-			url: url[2], //上侧
-			position: [ 0,  512, 0 ],
-			rotation: [ Math.PI / 2, 0, Math.PI ]
-			},
-			{
-			url: url[3], //下侧
-			position: [ 0, -512, 0 ],
-			rotation: [ - Math.PI / 2, 0, Math.PI ]
-			},
-			{
-			url: url[4], //前
-			position: [ 0, 0,  512 ],
-			rotation: [ 0, Math.PI, 0 ]
-			},
-			{
-			url: url[5], //后
-			position: [ 0, 0, -512 ],
-			rotation: [ 0, 0, 0 ]
-			}
-			];
-			//将六个图片添加到场景中
-			for ( var i = 0; i < sides.length; i ++ ) {
-			var side = sides[ i ];
-			var element = document.createElement( 'img' );
-			element.width = 1026; // 2 pixels extra to close the gap.
-			element.src = side.url;
-			//CSS3DObject 是拓展出去的方法，原型是object3D，见CSS3DRenderer.js
-			var object = new THREE.CSS3DObject( element );
-			object.position.fromArray( side.position );
-			object.rotation.fromArray( side.rotation );
-			scene.add( object );
-		}
+		// var c = new THREE.Mesh(new THREE.BoxGeometry(300, 300, 300, 7, 7, 7), new THREE.MultiMaterial(a));
+		
+
+
+
+		// 全景六面体
+		// var index = 0;
+    // var b = "mobile";
+    // var url = [load_url + "/" + villaId + "/" + name_arr[index] + "/" + b + "_f.jpg",
+    //  load_url + "/" + villaId + "/" + name_arr[index] + "/" + b + "_b.jpg",
+    //  load_url + "/" + villaId + "/" + name_arr[index] + "/" + b + "_u.jpg",
+    //  load_url + "/" + villaId + "/" + name_arr[index] + "/" + b + "_d.jpg",
+    //  load_url + "/" + villaId + "/" + name_arr[index] + "/" + b + "_l.jpg",
+    //  load_url + "/" + villaId + "/" + name_arr[index] + "/" + b + "_r.jpg"];
+		// 	var sides = [
+		// 	{
+		// 		url: url[0],  //右侧
+		// 		position: [ -512, 0, 0 ],
+		// 		rotation: [ 0, Math.PI / 2, 0 ]
+		// 	},
+		// 	{
+		// 		url: url[1], //左侧
+		// 		position: [ 512, 0, 0 ],
+		// 		rotation: [ 0, -Math.PI / 2, 0 ]
+		// 	},
+		// 	{
+		// 		url: url[2], //上侧
+		// 		position: [ 0,  512, 0 ],
+		// 		rotation: [ Math.PI / 2, 0, Math.PI ]
+		// 	},
+		// 	{
+		// 		url: url[3], //下侧
+		// 		position: [ 0, -512, 0 ],
+		// 		rotation: [ - Math.PI / 2, 0, Math.PI ]
+		// 	},
+		// 	{
+		// 		url: url[4], //前
+		// 		position: [ 0, 0,  512 ],
+		// 		rotation: [ 0, Math.PI, 0 ]
+		// 	},
+		// 	{
+		// 		url: url[5], //后
+		// 		position: [ 0, 0, -512 ],
+		// 		rotation: [ 0, 0, 0 ]
+		// 	}
+		// 	];
+		// 	//将六个图片添加到场景中
+		// 	for ( var i = 0; i < sides.length; i ++ ) {
+		// 		var side = sides[ i ];
+		// 		var element = document.createElement( 'img' );
+		// 		element.width = 1026; // 2 pixels extra to close the gap.
+		// 		element.src = side.url;
+		// 		//CSS3DObject 是拓展出去的方法，原型是object3D，见CSS3DRenderer.js
+		// 		var object = new THREE.CSS3DObject( element );
+		// 		object.position.fromArray( side.position );
+		// 		object.rotation.fromArray( side.rotation );
+		// 		scene.add( object );
+		// 	}
+
+
+
+
+
+
     // 创建一个法向量材质：其颜色取决于面的法向量的方向
     // var meshMaterial = new THREE.MeshNormalMaterial({
     //   flatShading: THREE.FlatShading,
