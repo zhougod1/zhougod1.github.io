@@ -1,44 +1,84 @@
 
 function init() {
-    // 获取浏览器窗口的宽高，后续会用
-    var width = window.innerWidth - 40;
-    var height = window.innerHeight - 40;
+    var scene;
+    var camera;
+    var renderer;
 
-    // 创建一个场景
-    var scene = new THREE.Scene()
+    // input type='file' 取到的路径是经过隐藏的路径（流浪器安全策略*/fakepath/*/）所以需要通过file取
+    function getObjectURL(file) { 
+      // 1.将file转base64
+      // var reads= new FileReader();
+      // reads.readAsDataURL(this.files[0]);   
+      // reads.onload=function (e) {
+      //   const a = this.result;
+      // };
 
-    // 创建一个具有透视效果的摄像机
-    var camera = new THREE.PerspectiveCamera(45, width / height, 1, 1000)
 
-    // 设置摄像机位置，并将其朝向场景中心
-    camera.position.set(0, 125, 125)
-    camera.lookAt(new THREE.Vector3(0, 100, 0))
-
-    // 创建一个 WebGL 渲染器，Three.js 还提供 <canvas>, <svg>, CSS3D 渲染器。
-    var renderer = new THREE.WebGLRenderer({
-      antialias: true
+      // 2.将file转真是文档路径 
+      var url = null;  
+      if (window.createObjcectURL != undefined) {  
+          url = window.createOjcectURL(file);  
+      } else if (window.URL != undefined) {  
+          url = window.URL.createObjectURL(file);  
+      } else if (window.webkitURL != undefined) {  
+          url = window.webkitURL.createObjectURL(file);  
+      }  
+      return url;  
+    }
+    document.getElementById('selectFile').addEventListener('change',function(){
+      const url = getObjectURL(this.files[0]);
+      circleMaterial.map = new THREE.TextureLoader().load(url);
     })
-    // renderer = new THREE.CSS3DRenderer();
 
-    // 设置渲染器的清除颜色（即背景色）和尺寸
-    // renderer.setClearColor(0xffffff)
-    renderer.setSize(width, height)
 
-    // 将渲染器的输出（此处是 canvas 元素）插入到 body
-    document.body.appendChild(renderer.domElement)
+    // 场景设置（创建场景，设置渲染器，设置摄像机，设计灯光）
+    function setScene(){
 
-    // 创建 环境光
-    var ambientLight = new THREE.AmbientLight(0x777777)
-    scene.add(ambientLight)
+      // 获取浏览器窗口的宽高，后续会用
+      var width = window.innerWidth - 40;
+      var height = window.innerHeight - 40;
 
-    // 添加聚光灯000000000000000000000000000000000000000000000
-    var spotLight = new THREE.SpotLight(0xaaaaaa)
-    spotLight.position.set(-40, 40, 80)
-    scene.add(spotLight)
+      // 创建一个场景
+      scene = new THREE.Scene()
 
+      // 创建一个具有透视效果的摄像机
+      camera = new THREE.PerspectiveCamera(45, width / height, 1, 1000)
+
+      // 设置摄像机位置，并将其朝向场景中心
+      camera.position.set(0, 125, 125)
+      camera.lookAt(new THREE.Vector3(0, 100, 0))
+
+      // 创建一个 WebGL 渲染器，Three.js 还提供 <canvas>, <svg>, CSS3D 渲染器。
+      renderer = new THREE.WebGLRenderer({
+        antialias: true
+      })
+      // renderer = new THREE.CSS3DRenderer();
+
+      // 设置渲染器的清除颜色（即背景色）和尺寸
+      // renderer.setClearColor(0xffffff)
+      renderer.setSize(width, height)
+
+      // 将渲染器的输出（此处是 canvas 元素）插入到 body
+      document.body.appendChild(renderer.domElement)
+
+      // 创建 环境光
+      var ambientLight = new THREE.AmbientLight(0x777777)
+      scene.add(ambientLight)
+
+      // 添加聚光灯000000000000000000000000000000000000000000000
+      var spotLight = new THREE.SpotLight(0xaaaaaa)
+      spotLight.position.set(-40, 40, 80)
+      scene.add(spotLight)
+    }
+    setScene();
     function render() {
       // 渲染，即摄像机拍下此刻的场景
       renderer.render(scene, camera)
+
+      // requestAnimationFrame在渲染完成后会执行函数
+      // 做了一个递归，requestAnimationFrame会根据浏览器完成最高渲染次数 (chrome 是 60/s) ，
+      // 其实相当完成了一个定时器setInterval，不过requestAnimationFrame的优点在于会自动符合浏览器的刷新频率，
+      // 而且requestAnimationFram在切换tab后会停止，重回tab继续，实现性能节省
       requestAnimationFrame(render)
     }
 
