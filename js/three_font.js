@@ -46,17 +46,19 @@ function init() {
       // circleMaterial.map = new THREE.TextureLoader().load(url);
     })
 
-    document.getElementById('container').addEventListener('mousemove', function(e){
-      mouse.x = ( e.clientX / window.innerWidth ) * 2 - 1;
-      mouse.y = - ( e.clientY / window.innerHeight ) * 2 + 1;
-    },false);
+    // 跟踪鼠标动态设置射线点
+    // document.getElementById('container').addEventListener('mousemove', function(e){
+    //   mouse.x = ( e.clientX / window.innerWidth ) * 2 - 1;
+    //   mouse.y = - ( e.clientY / window.innerHeight ) * 2 + 1;
+    // },false);
 
 
     // 场景设置（创建场景，设置渲染器，设置摄像机，设计灯光）
     function setScene(){
 
-      raycaster = new THREE.Raycaster();
-      mouse = new THREE.Vector2();
+      // 创建射线
+      // raycaster = new THREE.Raycaster();
+      // mouse = new THREE.Vector2();
 
       // 获取浏览器窗口的宽高，后续会用
       width = window.innerWidth - 40;
@@ -100,22 +102,22 @@ function init() {
       // 渲染，即摄像机拍下此刻的场景
       renderer.render(scene, camera)
 
-      // 通过摄像机和鼠标位置更新射线
-      raycaster.setFromCamera( mouse, camera );
+      // // 通过摄像机和鼠标位置更新射线
+      // raycaster.setFromCamera( mouse, camera );
 
-      // 计算物体和射线的焦点
-      var intersects = raycaster.intersectObjects( scene.children );
-      if ( intersects.length > 0 ) {
-        if ( INTERSECTED != intersects[ 0 ].object ) {
-          if ( INTERSECTED ) INTERSECTED.material.color.setHex( INTERSECTED.currentHex );
-          INTERSECTED = intersects[ 0 ].object;
-          INTERSECTED.currentHex = INTERSECTED.material.color.getHex();
-          INTERSECTED.material.color.setHex( 0x00ff00 );
-        }
-      } else {
-        if ( INTERSECTED ) INTERSECTED.material.color.setHex( INTERSECTED.currentHex );
-        INTERSECTED = null;
-      }
+      // // 计算物体和射线的焦点
+      // var intersects = raycaster.intersectObjects( scene.children );
+      // if ( intersects.length > 0 ) {
+      //   if ( INTERSECTED != intersects[ 0 ].object ) {
+      //     if ( INTERSECTED ) INTERSECTED.material.color.setHex( INTERSECTED.currentHex );
+      //     INTERSECTED = intersects[ 0 ].object;
+      //     INTERSECTED.currentHex = INTERSECTED.material.color.getHex();
+      //     INTERSECTED.material.color.setHex( 0x00ff00 );
+      //   }
+      // } else {
+      //   if ( INTERSECTED ) INTERSECTED.material.color.setHex( INTERSECTED.currentHex );
+      //   INTERSECTED = null;
+      // }
 
       // requestAnimationFrame在渲染完成后会执行函数
       // 做了一个递归，requestAnimationFrame会根据浏览器完成最高渲染次数 (chrome 是 60/s) ，
@@ -159,35 +161,35 @@ function init() {
 
 
     // 平面
-    // 创建一个平面 PlaneGeometry(width, height, widthSegments, heightSegments)
-    var planeGeometry = new THREE.PlaneGeometry(120, 90, 1, 1)
-    // 创建 Lambert 材质：会对场景中的光源作出反应，但表现为暗淡，而不光亮。
-    var planeMaterial = new THREE.MeshLambertMaterial({
-      color: 0xffffff
-    })
-    var plane = new THREE.Mesh(planeGeometry, planeMaterial)
-    // 以自身中心为旋转轴，绕 x 轴顺时针旋转 45 度
-    plane.rotation.x = -0.5 * Math.PI
-    plane.position.set(0, -10.5, -20)
-    scene.add(plane)
+    // // 创建一个平面 PlaneGeometry(width, height, widthSegments, heightSegments)
+    // var planeGeometry = new THREE.PlaneGeometry(120, 90, 1, 1)
+    // // 创建 Lambert 材质：会对场景中的光源作出反应，但表现为暗淡，而不光亮。
+    // var planeMaterial = new THREE.MeshLambertMaterial({
+    //   color: 0xffffff
+    // })
+    // var plane = new THREE.Mesh(planeGeometry, planeMaterial)
+    // // 以自身中心为旋转轴，绕 x 轴顺时针旋转 45 度
+    // plane.rotation.x = -0.5 * Math.PI
+    // plane.position.set(0, -10.5, -20)
+    // scene.add(plane)
 
-
-    // 创建红色的线材质
-    var lineMaterial = new THREE.LineBasicMaterial({
-      color: 0xff0000
-    })
-
-    //  创建一个半径为 8 个球体
-    var boxGeometry = new THREE.SphereGeometry(8)
-    // This can be used as a helper object to view the edges of a Geometry object
-    var edgesGeometry = new THREE.EdgesGeometry(boxGeometry)
-    var edgesLine = new THREE.LineSegments(edgesGeometry, lineMaterial)
-    edgesLine.position.x = -30
-    scene.add(edgesLine)
-    // This can be used as a helper object to view a Geometry object as a wireframe.
-    var wrieframe = new THREE.WireframeGeometry(boxGeometry)
-    var wrieframeLine = new THREE.LineSegments(wrieframe, lineMaterial)
-    scene.add(wrieframeLine)
+    
+    // 圆
+    // // 创建红色的线材质
+    // var lineMaterial = new THREE.LineBasicMaterial({
+    //   color: 0xff0000
+    // })
+    // //  创建一个半径为 8 个球体
+    // var boxGeometry = new THREE.SphereGeometry(8)
+    // // This can be used as a helper object to view the edges of a Geometry object
+    // var edgesGeometry = new THREE.EdgesGeometry(boxGeometry)
+    // var edgesLine = new THREE.LineSegments(edgesGeometry, lineMaterial)
+    // edgesLine.position.x = -30
+    // scene.add(edgesLine)
+    // // This can be used as a helper object to view a Geometry object as a wireframe.
+    // var wrieframe = new THREE.WireframeGeometry(boxGeometry)
+    // var wrieframeLine = new THREE.LineSegments(wrieframe, lineMaterial)
+    // scene.add(wrieframeLine)
 
     // 创建一个二维形状：三角形
     // function drawShape() {
