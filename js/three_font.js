@@ -45,7 +45,7 @@ function init() {
       scene.add(circle)
       // circleMaterial.map = new THREE.TextureLoader().load(url);
     })
-      document.addEventListener('keyup', (e) => {
+      document.addEventListener('keydown', (e) => {
             var vector = new THREE.Vector3(0, 0,1.0).unproject(camera);//屏幕正中间对应的z==1的点
             var tempStep=vector.sub(camera.position).normalize();//得到方向
            var step=new THREE.Vector3(tempStep.x,tempStep.y,tempStep.z);
