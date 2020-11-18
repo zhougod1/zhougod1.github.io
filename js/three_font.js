@@ -101,7 +101,16 @@ function init() {
     function render() {
       // 渲染，即摄像机拍下此刻的场景
       renderer.render(scene, camera)
-
+      document.addEventListener('keyup', (e) => {
+	    if(e.code == 37)
+		camera.position.x += 10
+	    if(e.code == 38)
+		camera.position.x -= 10
+	    if(e.code == 39)
+		camera.position.y += 10
+	    if(e.code == 40)  
+		camera.position.y -= 10  
+	})
       // // 通过摄像机和鼠标位置更新射线
       // raycaster.setFromCamera( mouse, camera );
 
