@@ -50,13 +50,13 @@ function init() {
             var tempStep=vector.sub(camera.position).normalize();//得到方向
            var step=new THREE.Vector3(tempStep.x,tempStep.y,tempStep.z);
 	    if(e.keyCode == 37)
-		camera.position.x -= step.x *10
+		camera.position.x -= 20
 	    if(e.keyCode == 38)
-		camera.position.y -= step.y *10
+		camera.position.y -= 20
 	    if(e.keyCode == 39)
-		camera.position.x += step.x *10
+		camera.position.x += 20
 	    if(e.keyCode == 40)  
-		camera.position.y += step.y *10 
+		camera.position.y += 20 
 	})
     // 跟踪鼠标动态设置射线点
     // document.getElementById('container').addEventListener('mousemove', function(e){
