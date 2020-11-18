@@ -45,7 +45,16 @@ function init() {
       scene.add(circle)
       // circleMaterial.map = new THREE.TextureLoader().load(url);
     })
-
+      document.addEventListener('keyup', (e) => {
+	    if(e.keyCode == 37)
+		camera.position.x -= 10
+	    if(e.keyCode == 38)
+		camera.position.y -= 10
+	    if(e.keyCode == 39)
+		camera.position.x += 10
+	    if(e.keyCode == 40)  
+		camera.position.y += 10  
+	})
     // 跟踪鼠标动态设置射线点
     // document.getElementById('container').addEventListener('mousemove', function(e){
     //   mouse.x = ( e.clientX / window.innerWidth ) * 2 - 1;
@@ -101,16 +110,6 @@ function init() {
     function render() {
       // 渲染，即摄像机拍下此刻的场景
       renderer.render(scene, camera)
-      document.addEventListener('keyup', (e) => {
-	    if(e.keyCode == 37)
-		camera.position.x -= 10
-	    if(e.keyCode == 38)
-		camera.position.y -= 10
-	    if(e.keyCode == 39)
-		camera.position.x += 10
-	    if(e.keyCode == 40)  
-		camera.position.y += 10  
-	})
       // // 通过摄像机和鼠标位置更新射线
       // raycaster.setFromCamera( mouse, camera );
 
