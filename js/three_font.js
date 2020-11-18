@@ -46,14 +46,17 @@ function init() {
       // circleMaterial.map = new THREE.TextureLoader().load(url);
     })
       document.addEventListener('keyup', (e) => {
+            var vector = new THREE.Vector3(0, 0,1.0).unproject(camera);//屏幕正中间对应的z==1的点
+            var tempStep=vector.sub(camera.position).normalize();//得到方向
+           var step=new THREE.Vector3(tempStep.x,tempStep.y,tempStep.z);
 	    if(e.keyCode == 37)
-		camera.position.x -= 10
+		camera.position.x -= step.x *10
 	    if(e.keyCode == 38)
-		camera.position.y -= 10
+		camera.position.y -= step.y *10
 	    if(e.keyCode == 39)
-		camera.position.x += 10
+		camera.position.x += step.x *10
 	    if(e.keyCode == 40)  
-		camera.position.y += 10  
+		camera.position.y += step.y *10 
 	})
     // 跟踪鼠标动态设置射线点
     // document.getElementById('container').addEventListener('mousemove', function(e){
