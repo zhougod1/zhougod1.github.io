@@ -1,1 +1,86 @@
-<script>location.href="../";</script>
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Fantd 组件示例</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            body {
+                font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+                background-color: #f5f7fa;
+                color: #333;
+                padding: 40px 20px;
+            }
+            .page {
+                max-width: 720px;
+                margin: 0 auto;
+            }
+            .page-title {
+                font-size: 24px;
+                font-weight: 600;
+                margin-bottom: 8px;
+            }
+            .page-desc {
+                font-size: 14px;
+                color: #999;
+                margin-bottom: 32px;
+            }
+            .list {
+                list-style: none;
+            }
+            .list li {
+                margin-bottom: 12px;
+            }
+            .list a {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 16px 20px;
+                background-color: #fff;
+                border-radius: 6px;
+                text-decoration: none;
+                color: #333;
+                font-size: 16px;
+                transition: all .2s ease;
+                border: 1px solid transparent;
+            }
+            .list a:hover {
+                border-color: #409eff;
+                color: #409eff;
+                transform: translateX(4px);
+            }
+            .list .name {
+                font-weight: 500;
+            }
+            .list .path {
+                font-size: 13px;
+                color: #aaa;
+            }
+            .list a:hover .path {
+                color: #409eff;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="page">
+            <h1 class="page-title">Fantd 组件示例</h1>
+            <p class="page-desc">点击查看各组件的演示页面</p>
+            <ul class="list">
+                <li><a href="./button.html"><span class="name">Button 按钮</span><span class="path">button.html</span></a></li>
+                <li><a href="./icon.html"><span class="name">Icon 图标</span><span class="path">icon.html</span></a></li>
+                <li><a href="./modal.html"><span class="name">Modal 弹窗</span><span class="path">modal.html</span></a></li>
+                <li><a href="./popoverSelect.html"><span class="name">PopoverSelect 气泡选择</span><span class="path">popoverSelect.html</span></a></li>
+                <li><a href="./Search.html"><span class="name">Search 搜索</span><span class="path">Search.html</span></a></li>
+                <li><a href="./Spin.html"><span class="name">Spin 加载</span><span class="path">Spin.html</span></a></li>
+                <li><a href="./swipeModel.html"><span class="name">SwipeModel 滑动弹层</span><span class="path">swipeModel.html</span></a></li>
+                <li><a href="./tab.html"><span class="name">Tab 标签页</span><span class="path">tab.html</span></a></li>
+                <li><a href="./tag.html"><span class="name">Tag 标签</span><span class="path">tag.html</span></a></li>
+            </ul>
+        </div>
+    </body>
+</html>
